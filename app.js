@@ -1,7 +1,5 @@
 'use strict';
 
-require('babel-register');
-
 const express = require('express');
 
 const app = express();
@@ -135,7 +133,7 @@ app.get('/get_all_categories', (req, res) => {
 });
 
 
-app.listen(8000);
+app.listen(8080);
 
 
 module.exports = app;
