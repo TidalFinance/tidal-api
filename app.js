@@ -77,6 +77,8 @@ const getPrice = (symbol) => {
 const Manager = {
   allAssets: [],
   allCategories: [],
+  userCurrentBasket: [],
+  userFutureBasket: [],
 
   async loadOneAssetBasic(assetIndex_) {
     Manager.allAssets[assetIndex_] = {index: assetIndex_};
@@ -146,6 +148,47 @@ const Manager = {
     Manager.allCategories[category_] = data;
   },
 
+  async loadUserBasket(userAddress, isCurrent, willRefresh) {
+    if (!willRefresh &&
+        ((isCurrent && Manager.userCurrentBasket.length > 0) ||
+         (!isCurrent && Manager.userFutureBasket.length > 0))) {
+      return isCurrent ? Manager.userCurrentBasket : Manager.userFutureBasket;
+    }
+
+    const array = [];
+    let all = [];
+    for (let i = 0; i < Manager.allAssets.length; ++i) {
+      all.push((async (i) => {
+        let isInBasket;
+        if (isCurrent) {
+          isInBasket = await callFunction(seller.methods.currentBasket(userAddress, i));
+        } else {
+          isInBasket = await callFunction(seller.methods.futureBasket(userAddress, i));
+        }
+
+        if (isInBasket) {
+          array.push(i);
+        }
+      })(i));
+      if (all.length >= 6) {
+        await Promise.all(all);
+        all = [];
+      }
+    }
+
+    if (all.length > 0) {
+      await Promise.all(all);
+    }
+
+    if (isCurrent) {
+      Manager.userCurrentBasket = array;
+    } else {
+      Manager.userFutureBasket = array;
+    }
+
+    return array;
+  },
+
   async execute() {
     for (let i = 0; i < ASSETS_NAME_LIST.length; ++i) {
       await Manager.loadOneAssetBasic(i);
@@ -176,6 +219,24 @@ app.get('/get_all_assets', (req, res) => {
 
 app.get('/get_all_categories', (req, res) => {
   res.send(Manager.allCategories);
+});
+
+
+app.get('/get_baskets', async (req, res) => {
+  const address = req.query.address;
+  const isCurrent = parseInt(req.query.is_current) || 0;
+  const willRefresh = parseInt(req.query.will_refresh) || 0;
+
+  if (!address) {
+    res.status(400).send({
+      message: 'missing-address'
+    });
+    return;
+  }
+
+  const baskets = await Manager.loadUserBasket(address, isCurrent, willRefresh);
+
+  res.send(baskets);
 });
 
 
