@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const request = require('request');
 
 const app = express();
 
@@ -19,6 +20,28 @@ const guarantor = new web3.eth.Contract([{"inputs":[],"stateMutability":"nonpaya
 const ASSETS_NAME_LIST = [['UNI', 'Uniswap']];
 const BASE_BASE = 1e18;
 
+const symbolToId = {
+  'AAVE': 'aave',
+  'CRV': 'curve-dao-token',
+  'UNI': 'uniswap',
+  'COMP': 'compound',
+  'BAL': 'balancer',
+  'AMPL': 'ampleforth',
+  'YFI': 'yearn-finance',
+  'MKR': 'maker',
+  'BNT': 'bancor-network',
+  'BZRX': 'bzx-protocol',
+  'GNO': 'gnosis',
+  'HEGIC': 'hegic',
+  'KNC': 'kyber-network',
+  'SNX': 'synthetix-network-token',
+  'PICKLE': 'pickle-finance',
+  'SUSHI': 'sushi',
+  'FARM': 'harvest-finance',
+  'IDLE': 'idle',
+  'STAKE': 'xdai-stake'
+};
+
 
 const callFunction = (func) => {
   return new Promise((resolve, reject) => {
@@ -31,6 +54,24 @@ const callFunction = (func) => {
     });
   });
 };
+
+
+const getPrice = (symbol) => {
+  const id = symbolToId[symbol];
+  return new Promise((resolve, reject) => {
+    const url = 'https://api.coingecko.com/api/v3/simple/price?ids='+ id +'&vs_currencies=usd';
+    request(url, (error, response, body) => {
+      if (error) {
+        reject('error-0');
+      } else if (response && response.statusCode == 200) {
+        const data = JSON.parse(body);
+        resolve(data[id]['usd']);
+      } else {
+        reject('error-1');
+      }
+    });
+  });
+}
 
 
 const Manager = {
@@ -55,6 +96,7 @@ const Manager = {
   async loadOneAssetExtended(assetIndex_) {
     const decimals = Manager.allAssets[assetIndex_].decimals;
     const base = 10**decimals;
+    let price = 0;
 
     const all = [(async() => {
       Manager.allAssets[assetIndex_].premiumRate = await callFunction(buyer.methods.getPremiumRate(assetIndex_));
@@ -70,9 +112,13 @@ const Manager = {
       Manager.allAssets[assetIndex_].premiumForGuarantor = (await callFunction(buyer.methods.premiumForGuarantor(assetIndex_))) / BASE_BASE;
     }) (), (async() => {
       Manager.allAssets[assetIndex_].premiumForSeller = (await callFunction(buyer.methods.premiumForSeller(assetIndex_))) / BASE_BASE;
+    }) (), (async() => {
+      price = await getPrice(Manager.allAssets[assetIndex_].symbol);
     }) ()];
     await Promise.all(all);
 
+    Manager.allAssets[assetIndex_].price = price;
+    Manager.allAssets[assetIndex_].guarantorValue = Manager.allAssets[assetIndex_].guarantorBalance * price;
     Manager.allAssets[assetIndex_].apr =
         Manager.allAssets[assetIndex_].premiumForSeller / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
   },
