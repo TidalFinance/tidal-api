@@ -101,6 +101,26 @@ const getPrice = (symbol) => {
 }
 
 
+const getPremiumRate = (category, assetUtilization) => {
+  let extra = 0;
+  let cap = 0.8 * 1e6;  // 80%
+
+  if (assetUtilization >= cap) {
+    extra = 800;
+  } else {
+    extra = 800 * assetUtilization / cap;
+  }
+
+  if (category == 0) {
+    return 400 + extra;
+  } else if (category == 1) {
+    return 1600 + extra;
+  } else {
+    return 3200 + extra;
+  }
+}
+
+
 const Manager = {
   allAssets: [],
   allCategories: [],
@@ -128,8 +148,6 @@ const Manager = {
     let price = 0;
 
     const all = [(async() => {
-      Manager.allAssets[assetIndex_].premiumRate = await callFunction(buyer.methods.getPremiumRate(assetIndex_));
-    }) (), (async() => {
       Manager.allAssets[assetIndex_].guarantorBalance = (await callFunction(guarantor.methods.assetBalance(assetIndex_))) / base;
     }) (), (async() => {
       Manager.allAssets[assetIndex_].sellerBalance = (await callFunction(seller.methods.assetBalance(assetIndex_))) / BASE_BASE;
@@ -146,10 +164,12 @@ const Manager = {
 
     Manager.allAssets[assetIndex_].price = price;
     Manager.allAssets[assetIndex_].guarantorValue = Manager.allAssets[assetIndex_].guarantorBalance * price;
-    Manager.allAssets[assetIndex_].apr =
-        Manager.allAssets[assetIndex_].assetSubscription * Manager.allAssets[assetIndex_].premiumRate / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
     Manager.allAssets[assetIndex_].assetUtilization =
         Manager.allAssets[assetIndex_].assetSubscription / Manager.allAssets[assetIndex_].sellerBalance * 1e6;
+    Manager.allAssets[assetIndex_].premiumRate = getPremiumRate(
+        Manager.allAssets[assetIndex_].category, Manager.allAssets[assetIndex_].assetUtilization);
+    Manager.allAssets[assetIndex_].apr =
+        Manager.allAssets[assetIndex_].assetSubscription * Manager.allAssets[assetIndex_].premiumRate / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
   },
 
   async loadOneCategory(category_) {
