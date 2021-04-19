@@ -106,17 +106,17 @@ const getPremiumRate = (category, assetUtilization) => {
   let cap = 0.8 * 1e6;  // 80%
 
   if (assetUtilization >= cap) {
-    extra = 800;
+    extra = 1000;
   } else {
-    extra = 800 * assetUtilization / cap;
+    extra = 1000 * assetUtilization / cap;
   }
 
   if (category == 0) {
-    return 400 + extra;
+    return 500 + extra;
   } else if (category == 1) {
-    return 1600 + extra;
+    return 1135 + extra;
   } else {
-    return 3200 + extra;
+    return 2173 + extra;
   }
 }
 
