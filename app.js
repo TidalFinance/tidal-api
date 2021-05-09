@@ -168,8 +168,11 @@ const Manager = {
         Manager.allAssets[assetIndex_].assetSubscription / Manager.allAssets[assetIndex_].sellerBalance * 1e6;
     Manager.allAssets[assetIndex_].premiumRate = getPremiumRate(
         Manager.allAssets[assetIndex_].category, Manager.allAssets[assetIndex_].assetUtilization);
+
     Manager.allAssets[assetIndex_].apr =
-        Manager.allAssets[assetIndex_].assetSubscription * Manager.allAssets[assetIndex_].premiumRate / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
+        Manager.allAssets[assetIndex_].premiumForSeller / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365 * 1e6;
+    Manager.allAssets[assetIndex_].guarantorApr =
+        Manager.allAssets[assetIndex_].premiumForGuarantor / Manager.allAssets[assetIndex_].guarantorValue / 7 * 365 * 1e6;
   },
 
   async loadOneCategory(category_) {
