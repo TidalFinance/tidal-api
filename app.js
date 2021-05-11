@@ -170,29 +170,28 @@ const Manager = {
         Manager.allAssets[assetIndex_].category, Manager.allAssets[assetIndex_].assetUtilization);
 
     Manager.allAssets[assetIndex_].apr =
-        (Manager.allAssets[assetIndex_].assetUtilization * Manager.allAssets[assetIndex_].premiumRate * 0.9) / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
+        (Manager.allAssets[assetIndex_].assetSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.9) / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
     Manager.allAssets[assetIndex_].guarantorApr =
-        (Manager.allAssets[assetIndex_].assetUtilization * Manager.allAssets[assetIndex_].premiumRate * 0.05) / Manager.allAssets[assetIndex_].guarantorValue / 7 * 365;
+        (Manager.allAssets[assetIndex_].assetSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.05) / Manager.allAssets[assetIndex_].guarantorValue / 7 * 365;
   },
 
   async loadOneCategory(category_) {
     const data = {
       reserve: 0,
       premium: 0,
-      apy: 0,
+      apr: 0,
       payout: 0
     };
 
     for (let i = 0; i < Manager.allAssets.length; ++i) {
       if (Manager.allAssets[i].category == category_) {
-        data.reserve += Manager.allAssets[i].sellerBalance * 1;
-        data.premium += Manager.allAssets[i].premiumForSeller * 1;
+        data.premium += Manager.allAssets[i].assetSubscription * Manager.allAssets[i].premiumRate * 0.9;
       }
     }
 
     data.reserve = (await callFunction(seller.methods.categoryBalance(category_))) / BASE_BASE;
-    data.apy = data.reserve ? (data.premium / data.reserve / 7 * 365 * 100).toFixed(0) : '0';
-    data.tokenAPY = '0';  // TODO: Get price
+    data.apr = data.reserve ? (data.premium / data.reserve / 7 * 365 * 100).toFixed(0) : '0';
+    data.tokenAPR = '0';  // TODO: Get price
     Manager.allCategories[category_] = data;
   },
 
