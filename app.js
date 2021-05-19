@@ -18,26 +18,12 @@ const guarantor = new web3.eth.Contract([{"inputs":[],"stateMutability":"nonpaya
 
 
 const ASSETS_NAME_LIST = [
-['UNI', 'Uniswap'],
-['AAVE', 'Aave'],
-['CRV', 'Curve'],
-['COMP', 'Compound'],
-['BAL', 'Balancer'],
-['1INCH', '1Inch'],
 ['YFI', 'Yearn'],
-['MKR', 'Maker'],
 ['BNT', 'Bancor'],
 ['BZRX', 'bZx'],
-['GNO', 'Gnosis'],
-['HEGIC', 'Hegic'],
 ['KNC', 'Kyber'],
 ['SNX', 'Synthetix'],
-['PICKLE', 'Pickle'],
-['HOPR', 'HOPR'],
-['FARM', 'Harvest'],
 ['IDLE', 'Idle'],
-['SDT', 'Stake DAO'],
-['INJ', 'Injective'],
 ['POND', 'Marlin'],
 ['EZ', 'EasyFi V2']];
 
