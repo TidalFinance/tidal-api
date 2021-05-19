@@ -22,10 +22,10 @@ const ASSETS_NAME_LIST = [
 ['BNT', 'Bancor'],
 ['BZRX', 'bZx'],
 ['KNC', 'Kyber'],
-['SNX', 'Synthetix'],
 ['IDLE', 'Idle'],
 ['POND', 'Marlin'],
-['EZ', 'EasyFi V2']];
+['EZ', 'EasyFi V2'],
+['SDT', 'Stake DAO']];
 
 const BASE_BASE = 1e18;
 
