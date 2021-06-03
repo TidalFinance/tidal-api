@@ -20,7 +20,7 @@ const guarantor = new web3.eth.Contract([{"inputs":[],"stateMutability":"nonpaya
 const ASSETS_NAME_LIST = [
 ['YFI', 'Yearn'],
 ['BZRX', 'bZx'],
-['FIS', 'StaFi']
+['FIS', 'StaFi'],
 ['UNI', 'Uniswap'],
 ['POND', 'Marlin'],
 ['EZ', 'EasyFi V2'],
@@ -122,6 +122,7 @@ const Manager = {
       Manager.allAssets[assetIndex_].category = await callFunction(assetManager.methods.getAssetCategory(assetIndex_));
     }) ()];
     await Promise.all(all);
+
     Manager.allAssets[assetIndex_].symbol = ASSETS_NAME_LIST[assetIndex_][0];
     Manager.allAssets[assetIndex_].name = ASSETS_NAME_LIST[assetIndex_][1];
 
