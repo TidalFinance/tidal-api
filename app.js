@@ -24,7 +24,7 @@ const ASSETS_NAME_LIST = [
 ['UNI', 'Uniswap'],
 ['POND', 'Marlin'],
 ['EZ', 'EasyFi V2'],
-['CRV', 'Curve DAO'],
+['CRV', 'Curve'],
 ['XEND', 'Xend Finance']];
 
 const BASE_BASE = 1e18;
