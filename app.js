@@ -138,13 +138,13 @@ const Manager = {
     const all = [(async() => {
       Manager.allAssets[assetIndex_].guarantorBalance = (await callFunction(guarantor.methods.assetBalance(assetIndex_))) / base;
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].sellerBalance = (await callFunction(seller.methods.assetBalance(assetIndex_))) / BASE_BASE;
+      Manager.allAssets[assetIndex_].sellerBalance = (await callFunction(seller.methods.assetBalance(assetIndex_)));
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].assetSubscription = (await callFunction(buyer.methods.assetSubscription(assetIndex_))) / BASE_BASE;
+      Manager.allAssets[assetIndex_].assetSubscription = (await callFunction(buyer.methods.assetSubscription(assetIndex_)));
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].premiumForGuarantor = (await callFunction(buyer.methods.premiumForGuarantor(assetIndex_))) / BASE_BASE;
+      Manager.allAssets[assetIndex_].premiumForGuarantor = (await callFunction(buyer.methods.premiumForGuarantor(assetIndex_)));
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].premiumForSeller = (await callFunction(buyer.methods.premiumForSeller(assetIndex_))) / BASE_BASE;
+      Manager.allAssets[assetIndex_].premiumForSeller = (await callFunction(buyer.methods.premiumForSeller(assetIndex_)));
     }) (), (async() => {
       price = await getPrice(Manager.allAssets[assetIndex_].symbol);
     }) ()];
@@ -177,7 +177,7 @@ const Manager = {
       }
     }
 
-    data.reserve = (await callFunction(seller.methods.categoryBalance(category_))) / BASE_BASE;
+    data.reserve = (await callFunction(seller.methods.categoryBalance(category_)));
     data.apr = data.reserve ? (data.premium / data.reserve / 7 * 365).toFixed(0) : '0';
     data.tokenAPR = '0';  // TODO: Get price
     Manager.allCategories[category_] = data;
