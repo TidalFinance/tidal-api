@@ -112,8 +112,7 @@ const getPremiumRate = (category, assetUtilization) => {
 const Manager = {
   allAssets: [],
   allCategories: [],
-  userCurrentBasket: [],
-  userFutureBasket: [],
+  userBasket: [],
 
   async loadOneAssetBasic(assetIndex_) {
     Manager.allAssets[assetIndex_] = {index: assetIndex_};
@@ -184,24 +183,16 @@ const Manager = {
     Manager.allCategories[category_] = data;
   },
 
-  async loadUserBasket(userAddress, isCurrent, willRefresh) {
-    if (!willRefresh &&
-        ((isCurrent && Manager.userCurrentBasket.length > 0) ||
-         (!isCurrent && Manager.userFutureBasket.length > 0))) {
-      return isCurrent ? Manager.userCurrentBasket : Manager.userFutureBasket;
+  async loadUserBasket(userAddress, willRefresh) {
+    if (!willRefresh && Manager.userBasket.length > 0) {
+      return Manager.userBasket;
     }
 
     const array = [];
     let all = [];
     for (let i = 0; i < Manager.allAssets.length; ++i) {
       all.push((async (i) => {
-        let isInBasket;
-        if (isCurrent) {
-          isInBasket = await callFunction(seller.methods.currentBasket(userAddress, i));
-        } else {
-          isInBasket = await callFunction(seller.methods.futureBasket(userAddress, i));
-        }
-
+        let isInBasket = await callFunction(seller.methods.userBasket(userAddress, i));
         if (isInBasket) {
           array.push(i);
         }
@@ -215,12 +206,8 @@ const Manager = {
     if (all.length > 0) {
       await Promise.all(all);
     }
-
-    if (isCurrent) {
-      Manager.userCurrentBasket = array;
-    } else {
-      Manager.userFutureBasket = array;
-    }
+    console.log(array)
+    Manager.userBasket = array;
 
     return array;
   },
@@ -260,8 +247,7 @@ app.get('/get_all_categories', (req, res) => {
 
 app.get('/get_baskets', async (req, res) => {
   const address = req.query.address;
-  const isCurrent = parseInt(req.query.is_current) || 0;
-  const willRefresh = parseInt(req.query.will_refresh) || 0;
+  const willRefresh = parseInt(req.query.will_refresh) || 1;
 
   if (!address) {
     res.status(400).send({
@@ -270,7 +256,7 @@ app.get('/get_baskets', async (req, res) => {
     return;
   }
 
-  const baskets = await Manager.loadUserBasket(address, isCurrent, willRefresh);
+  const baskets = await Manager.loadUserBasket(address, willRefresh);
 
   res.send(baskets);
 });
