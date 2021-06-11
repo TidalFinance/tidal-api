@@ -4,9 +4,7 @@ const express = require('express');
 const request = require('request');
 
 const env = process.env.NODE_ENV || "development";
-console.log(env)
 const config = require("./config/config.json")[env];
-console.log(config)
 
 const app = express();
 
@@ -31,8 +29,6 @@ const ASSETS_NAME_LIST = [
 ['EZ', 'EasyFi V2'],
 ['CRV', 'Curve'],
 ['XEND', 'Xend Finance']];
-
-// const BASE_BASE = 1e18;
 
 const symbolToId = {
   'AAVE': 'aave',
@@ -118,7 +114,6 @@ const Manager = {
   allCategories: [],
   userCurrentBasket: [],
   userFutureBasket: [],
-  BASE_BASE: 1e18,
 
   async loadOneAssetBasic(assetIndex_) {
     Manager.allAssets[assetIndex_] = {index: assetIndex_};
@@ -144,13 +139,13 @@ const Manager = {
     const all = [(async() => {
       Manager.allAssets[assetIndex_].guarantorBalance = (await callFunction(guarantor.methods.assetBalance(assetIndex_))) / base;
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].sellerBalance = (await callFunction(seller.methods.assetBalance(assetIndex_))) / Manager.BASE_BASE;
+      Manager.allAssets[assetIndex_].sellerBalance = (await callFunction(seller.methods.assetBalance(assetIndex_))) / config.baseBase;
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].assetSubscription = (await callFunction(buyer.methods.assetSubscription(assetIndex_))) / Manager.BASE_BASE;
+      Manager.allAssets[assetIndex_].assetSubscription = (await callFunction(buyer.methods.assetSubscription(assetIndex_))) / config.baseBase;
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].premiumForGuarantor = (await callFunction(buyer.methods.premiumForGuarantor(assetIndex_))) / Manager.BASE_BASE;
+      Manager.allAssets[assetIndex_].premiumForGuarantor = (await callFunction(buyer.methods.premiumForGuarantor(assetIndex_))) / config.baseBase;
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].premiumForSeller = (await callFunction(buyer.methods.premiumForSeller(assetIndex_))) / Manager.BASE_BASE;
+      Manager.allAssets[assetIndex_].premiumForSeller = (await callFunction(buyer.methods.premiumForSeller(assetIndex_))) / config.baseBase;
     }) (), (async() => {
       price = await getPrice(Manager.allAssets[assetIndex_].symbol);
     }) ()];
@@ -183,7 +178,7 @@ const Manager = {
       }
     }
 
-    data.reserve = (await callFunction(seller.methods.categoryBalance(category_))) / Manager.BASE_BASE;
+    data.reserve = (await callFunction(seller.methods.categoryBalance(category_))) / config.baseBase;
     data.apr = data.reserve ? (data.premium / data.reserve / 7 * 365).toFixed(0) : '0';
     data.tokenAPR = '0';  // TODO: Get price
     Manager.allCategories[category_] = data;
@@ -230,14 +225,7 @@ const Manager = {
     return array;
   },
 
-  async loadBaseTokenDecimal() {
-    const decimals = await callFunction(baseToken.methods.decimals())
-    Manager.BASE_BASE = 10 ** decimals
-    console.log(Manager.BASE_BASE)
-  },
-
   async execute() {
-    await Manager.loadBaseTokenDecimal()
     for (let i = 0; i < ASSETS_NAME_LIST.length; ++i) {
       await Manager.loadOneAssetBasic(i);
       await Manager.loadOneAssetExtended(i);
