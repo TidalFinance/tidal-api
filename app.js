@@ -206,7 +206,7 @@ const Manager = {
     if (all.length > 0) {
       await Promise.all(all);
     }
-    console.log(array)
+    
     Manager.userBasket = array;
 
     return array;
