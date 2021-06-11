@@ -70,6 +70,15 @@ const callFunction = (func) => {
 };
 
 
+const waitFor = (duration) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('');
+    }, duration);
+  });
+}
+
+
 const getPrice = (symbol) => {
   const id = symbolToId[symbol];
   return new Promise((resolve, reject) => {
@@ -90,6 +99,19 @@ const getPrice = (symbol) => {
       }
     });
   });
+}
+
+
+const getPriceRetry = async (symbol, times=4) => {
+  for (let i = 0; i < times; ++i) {
+    try {
+      return await getPrice(symbol);
+    } catch(e) {
+      await waitFor(1000);
+    }
+  }
+
+  throw new Error('error-2');
 }
 
 
@@ -146,7 +168,7 @@ const Manager = {
     }) (), (async() => {
       Manager.allAssets[assetIndex_].premiumForSeller = (await callFunction(buyer.methods.premiumForSeller(assetIndex_))) / BASE_BASE;
     }) (), (async() => {
-      price = await getPrice(Manager.allAssets[assetIndex_].symbol);
+      price = await getPriceRetry(Manager.allAssets[assetIndex_].symbol);
     }) ()];
     await Promise.all(all);
 
