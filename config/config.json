@@ -6,7 +6,7 @@
         "sellerAddress": "0xC538b02Ed37f5f669178c731aF5e0dA7154C7135",
         "guarantorAddress": "0x918DA77f1847bf645614a8878290d87604302324",
         "baseTokenAddress": "0x4146fE7124A011BB9bBDac8B987d773E5D0dD483",
-        "baseBase": 18,
+        "baseBase": 1e18,
         "port": 8080
     },
     "production":{
@@ -16,7 +16,7 @@
         "sellerAddress": "0xC538b02Ed37f5f669178c731aF5e0dA7154C7135",
         "guarantorAddress": "0x918DA77f1847bf645614a8878290d87604302324",
         "baseTokenAddress": "0x4146fE7124A011BB9bBDac8B987d773E5D0dD483",
-        "baseBase": 18,
+        "baseBase": 1e18,
         "port": 8080
     }
 }
