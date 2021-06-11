@@ -1,0 +1,22 @@
+{
+    "development":{
+        "web3Addr": "https://rpc-mumbai.maticvigil.com/v1/80f11e9ae38e65397d37759c6ffc33abd7735c0d",
+        "assetManagerAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "buyerAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "sellerAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "guarantorAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "baseTokenAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "baseBase": 18,
+        "port": 8080
+    },
+    "production":{
+        "web3Addr": "https://rpc-mumbai.maticvigil.com/v1/80f11e9ae38e65397d37759c6ffc33abd7735c0d",
+        "assetManagerAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "buyerAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "sellerAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "guarantorAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "baseTokenAddress": "0x48EDFef4b3f956136bCD84888793f6bc115a4675",
+        "baseBase": 18,
+        "port": 8080
+    }
+}
