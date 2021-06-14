@@ -154,8 +154,8 @@ const Manager = {
     });
   },
 
-  async loadAllPayoutRequests() {
-    let index = 0;
+  async loadMorePayoutRequests() {
+    let index = Manager.payoutRequests.length;
     while(1) {
       try {
         await Manager.loadOnePayoutRequest(index);
@@ -287,13 +287,19 @@ const Manager = {
     await Manager.loadOneCategory(0);
     await Manager.loadOneCategory(1);
     await Manager.loadOneCategory(2);
+  },
 
-    await Manager.loadAllPayoutRequests();
+  async repeat() {
+    await Manager.loadMorePayoutRequests();
   }
 };
 
 
 Manager.execute();
+
+setInterval(() => {
+  Manager.repeat();
+}, 60000);
 
 
 app.use(function(req, res, next) {
