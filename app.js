@@ -196,7 +196,7 @@ const Manager = {
     }) (), (async() => {
       Manager.allAssets[assetIndex_].sellerBalance = (await callFunction(seller.methods.assetBalance(assetIndex_))) / config.baseBase;
     }) (), (async() => {
-      Manager.allAssets[assetIndex_].assetSubscription = (await callFunction(buyer.methods.assetSubscription(assetIndex_))) / config.baseBase;
+      Manager.allAssets[assetIndex_].currentSubscription = (await callFunction(buyer.methods.currentSubscription(assetIndex_))) / config.baseBase;
     }) (), (async() => {
       Manager.allAssets[assetIndex_].premiumForGuarantor = (await callFunction(buyer.methods.premiumForGuarantor(assetIndex_))) / config.baseBase;
     }) (), (async() => {
@@ -206,25 +206,25 @@ const Manager = {
     }) (), (async() => {
       tidalPrice = await getPriceRetry('TIDAL');
     }) (), (async() => {
-      bonusOfS = (await callFunction(bonus.methods.bonusPerAssetOfS())) / config.tidalBase;
+      bonusOfS = (await callFunction(bonus.methods.bonusPerAssetOfS(assetIndex_))) / config.tidalBase;
     }) (), (async() => {
-      bonusOfG = (await callFunction(bonus.methods.bonusPerAssetOfG())) / config.tidalBase;
+      bonusOfG = (await callFunction(bonus.methods.bonusPerAssetOfG(assetIndex_))) / config.tidalBase;
     }) ()];
     await Promise.all(all);
 
     Manager.allAssets[assetIndex_].price = price;
     Manager.allAssets[assetIndex_].guarantorValue = Manager.allAssets[assetIndex_].guarantorBalance * price;
     Manager.allAssets[assetIndex_].assetUtilization =
-        Manager.allAssets[assetIndex_].assetSubscription / Manager.allAssets[assetIndex_].sellerBalance * 1e6;
+        Manager.allAssets[assetIndex_].currentSubscription / Manager.allAssets[assetIndex_].sellerBalance * 1e6;
     Manager.allAssets[assetIndex_].premiumRate = getPremiumRate(
         Manager.allAssets[assetIndex_].category, Manager.allAssets[assetIndex_].assetUtilization);
 
     Manager.allAssets[assetIndex_].apr =
-        (Manager.allAssets[assetIndex_].assetSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.9) / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
+        (Manager.allAssets[assetIndex_].currentSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.9) / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
     Manager.allAssets[assetIndex_].sellerTidalApr =
         bonusOfS / Manager.allAssets[assetIndex_].sellerBalance * tidalPrice / 7 * 365 * 1e6;
     Manager.allAssets[assetIndex_].guarantorApr =
-        (Manager.allAssets[assetIndex_].assetSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.05) / Manager.allAssets[assetIndex_].guarantorValue / 7 * 365;
+        (Manager.allAssets[assetIndex_].currentSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.05) / Manager.allAssets[assetIndex_].guarantorValue / 7 * 365;
     Manager.allAssets[assetIndex_].guarantorTidalApr =
         bonusOfG / Manager.allAssets[assetIndex_].guarantorValue * tidalPrice / 7 * 365 * 1e6;
   },
@@ -239,7 +239,7 @@ const Manager = {
 
     for (let i = 0; i < Manager.allAssets.length; ++i) {
       if (Manager.allAssets[i].category == category_) {
-        data.premium += Manager.allAssets[i].assetSubscription * Manager.allAssets[i].premiumRate * 0.9;
+        data.premium += Manager.allAssets[i].currentSubscription * Manager.allAssets[i].premiumRate * 0.9;
       }
     }
 
