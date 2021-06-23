@@ -120,18 +120,12 @@ const getPriceRetry = async (symbol, times=4) => {
 }
 
 
-const getPremiumRate = (category, assetUtilization) => {
-  let extra = 0;
-  let cap = 0.8 * 1e6;  // 80%
-
-  if (assetUtilization >= cap) {
-    extra = 1000;
+const getPremiumRate = (assetIndex) => {
+  if (assetIndex == 3 || assetIndex == 6) {
+    return 384
   } else {
-    extra = 1000 * assetUtilization / cap;
+    return 961;
   }
-
-  // NOTE: This is a temporary change.
-  return 1135 + extra;
 }
 
 
@@ -216,8 +210,8 @@ const Manager = {
     Manager.allAssets[assetIndex_].guarantorValue = Manager.allAssets[assetIndex_].guarantorBalance * price;
     Manager.allAssets[assetIndex_].assetUtilization =
         Manager.allAssets[assetIndex_].currentSubscription / Manager.allAssets[assetIndex_].sellerBalance * 1e6;
-    Manager.allAssets[assetIndex_].premiumRate = getPremiumRate(
-        Manager.allAssets[assetIndex_].category, Manager.allAssets[assetIndex_].assetUtilization);
+
+    Manager.allAssets[assetIndex_].premiumRate = getPremiumRate(assetIndex_);
 
     Manager.allAssets[assetIndex_].apr =
         (Manager.allAssets[assetIndex_].currentSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.9) / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
