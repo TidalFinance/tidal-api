@@ -173,8 +173,13 @@ const Manager = {
     Manager.allAssets[assetIndex_].symbol = ASSETS_NAME_LIST[assetIndex_][0];
     Manager.allAssets[assetIndex_].name = ASSETS_NAME_LIST[assetIndex_][1];
 
-    const token = new web3.eth.Contract(erc20Abi, Manager.allAssets[assetIndex_].token);
-    Manager.allAssets[assetIndex_].decimals = await callFunction(token.methods.decimals());
+    if (Manager.allAssets[assetIndex_].token != '0' && Manager.allAssets[assetIndex_].token != '0x0' &&
+        Manager.allAssets[assetIndex_].token != '0x0000000000000000000000000000000000000000') {
+      const token = new web3.eth.Contract(erc20Abi, Manager.allAssets[assetIndex_].token);
+      Manager.allAssets[assetIndex_].decimals = await callFunction(token.methods.decimals());
+    } else {
+      Manager.allAssets[assetIndex_].decimals = 18;
+    }
   },
 
   async loadOneAssetExtended(assetIndex_) {
