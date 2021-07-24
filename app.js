@@ -24,14 +24,12 @@ const committee = new web3.eth.Contract([{"type":"constructor","stateMutability"
 const baseToken = new web3.eth.Contract(erc20Abi, config.baseTokenAddress)
 
 const ASSETS_NAME_LIST = [
-['YFI', 'Yearn'],
 ['BZRX', 'bZx'],
 ['FIS', 'StaFi'],
-['UNI', 'Uniswap'],
-['POND', 'Marlin'],
+['XEND', 'Xend Finance'],
 ['EZ', 'EasyFi V2'],
-['CRV', 'Curve'],
-['XEND', 'Xend Finance']];
+['YFI', 'Yearn'],
+['CRV', 'Curve']];
 
 const symbolToId = {
   'AAVE': 'aave',
@@ -121,7 +119,7 @@ const getPriceRetry = async (symbol, times=4) => {
 
 
 const getPremiumRate = (assetIndex) => {
-  if (assetIndex == 3 || assetIndex == 6) {
+  if (assetIndex == 5) {
     return 384
   } else {
     return 961;
@@ -173,7 +171,9 @@ const Manager = {
     Manager.allAssets[assetIndex_].symbol = ASSETS_NAME_LIST[assetIndex_][0];
     Manager.allAssets[assetIndex_].name = ASSETS_NAME_LIST[assetIndex_][1];
 
-    if (Manager.allAssets[assetIndex_].token != '0' && Manager.allAssets[assetIndex_].token != '0x0' &&
+    if (Manager.allAssets[assetIndex_].token != 0 &&
+        Manager.allAssets[assetIndex_].token != '0' &&
+        Manager.allAssets[assetIndex_].token != '0x0' &&
         Manager.allAssets[assetIndex_].token != '0x0000000000000000000000000000000000000000') {
       const token = new web3.eth.Contract(erc20Abi, Manager.allAssets[assetIndex_].token);
       Manager.allAssets[assetIndex_].decimals = await callFunction(token.methods.decimals());

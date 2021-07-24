@@ -13,14 +13,14 @@
         "port": 8080
     },
     "production":{
-        "web3Addr": "https://rpc-mumbai.maticvigil.com/v1/80f11e9ae38e65397d37759c6ffc33abd7735c0d",
-        "assetManagerAddress": "0xb194621f4a45623d14d9ddf84fe4cea74798a2ed",
-        "buyerAddress": "0xc2a62558555682c068edab623cd99f7ad879d93c",
-        "sellerAddress": "0xe144d7871b035088fb6242cebd37caffd1bd155f",
-        "guarantorAddress": "0x24021c86cf44bfe7d954a146cf4563080f9f009d",
-        "bonusAddress": "0x3aec98a75b6053f82504c4577566f37c298afa06",
-        "committeeAddress": "0xca3c906b65f1fcd0fb7746b3e72f82a7f908afd6",
-        "baseTokenAddress": "0x5382fd16980504f6b487261795a910e9b3b6557c",
+        "web3Addr": "https://rpc-mainnet.maticvigil.com/v1/80f11e9ae38e65397d37759c6ffc33abd7735c0d",
+        "assetManagerAddress": "0x6c58b18f683d0d9534944afce2ba286f06dca074",
+        "buyerAddress": "0x0865af16f373368669824e73e51572cc0dc94d40",
+        "sellerAddress": "0x91378bd7babd5c466c66177256ecffd79d8a7450",
+        "guarantorAddress": "0x4b410ab7c972b0fab9fdda84f2aceb7e485d4e07",
+        "bonusAddress": "0xa59beefbb1713bfaadabf1d20662b8b83371b6fb",
+        "committeeAddress": "0x11c1427a39f96e1352b514b1c07493e3c06dea67",
+        "baseTokenAddress": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
         "baseBase": 1e6,
         "tidalBase": 1e18,
         "port": 8080
