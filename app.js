@@ -27,7 +27,7 @@ const ASSETS_NAME_LIST = [
 ['BZRX', 'bZx'],
 ['FIS', 'StaFi'],
 ['XEND', 'Xend Finance'],
-['EZ', 'EasyFi V2'],
+['EZ', 'EasyFi'],
 ['YFI', 'Yearn'],
 ['CRV', 'Curve']];
 
