@@ -213,13 +213,24 @@ const Manager = {
 
     Manager.allAssets[assetIndex_].price = price;
     Manager.allAssets[assetIndex_].guarantorValue = Manager.allAssets[assetIndex_].guarantorBalance * price;
-    Manager.allAssets[assetIndex_].assetUtilization =
-        Manager.allAssets[assetIndex_].currentSubscription / Manager.allAssets[assetIndex_].sellerBalance * 1e6;
+
+    if (Manager.allAssets[assetIndex_].currentSubscription > Manager.allAssets[assetIndex_].sellerBalance) {
+      Manager.allAssets[assetIndex_].assetUtilization = 1e6;
+    } else {
+      Manager.allAssets[assetIndex_].assetUtilization =
+          Manager.allAssets[assetIndex_].currentSubscription / Manager.allAssets[assetIndex_].sellerBalance * 1e6;
+    }
 
     Manager.allAssets[assetIndex_].premiumRate = getPremiumRate(assetIndex_);
 
-    Manager.allAssets[assetIndex_].apr =
-        (Manager.allAssets[assetIndex_].currentSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.9) / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
+    if (Manager.allAssets[assetIndex_].currentSubscription > Manager.allAssets[assetIndex_].sellerBalance) {
+      Manager.allAssets[assetIndex_].apr =
+          (Manager.allAssets[assetIndex_].premiumRate * 0.9) / 7 * 365;
+    } else {
+      Manager.allAssets[assetIndex_].apr =
+          (Manager.allAssets[assetIndex_].currentSubscription * Manager.allAssets[assetIndex_].premiumRate * 0.9) / Manager.allAssets[assetIndex_].sellerBalance / 7 * 365;
+    }
+
     Manager.allAssets[assetIndex_].sellerTidalApr =
         bonusOfS / Manager.allAssets[assetIndex_].sellerBalance * tidalPrice / 7 * 365 * 1e6;
     Manager.allAssets[assetIndex_].guarantorApr =
