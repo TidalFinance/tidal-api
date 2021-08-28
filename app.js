@@ -24,12 +24,13 @@ const committee = new web3.eth.Contract([{"type":"constructor","stateMutability"
 const baseToken = new web3.eth.Contract(erc20Abi, config.baseTokenAddress)
 
 const ASSETS_NAME_LIST = [
-['BZRX', 'bZx'],
 ['FIS', 'StaFi'],
+['IF', 'Impossible Finance'],
+['POND', 'MARLIN'],
+['BZRX', 'bZx'],
 ['XEND', 'Xend Finance'],
 ['EZ', 'EasyFi'],
-['YFI', 'Yearn'],
-['CRV', 'Curve']];
+['YFI', 'Yearn']];
 
 const symbolToId = {
   'AAVE': 'aave',
@@ -38,6 +39,7 @@ const symbolToId = {
   'COMP': 'compound-governance-token',
   'BAL': 'balancer',
   'YFI': 'yearn-finance',
+  'IF': 'impossible-finance',
   'MKR': 'maker',
   'BNT': 'bancor',
   'BZRX': 'bzx-protocol',

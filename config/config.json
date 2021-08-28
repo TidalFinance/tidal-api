@@ -14,15 +14,15 @@
     },
     "production":{
         "web3Addr": "https://rpc-mainnet.maticvigil.com/v1/80f11e9ae38e65397d37759c6ffc33abd7735c0d",
-        "assetManagerAddress": "0x6c58b18f683d0d9534944afce2ba286f06dca074",
-        "buyerAddress": "0x0865af16f373368669824e73e51572cc0dc94d40",
-        "sellerAddress": "0x91378bd7babd5c466c66177256ecffd79d8a7450",
-        "guarantorAddress": "0x4b410ab7c972b0fab9fdda84f2aceb7e485d4e07",
-        "bonusAddress": "0xa59beefbb1713bfaadabf1d20662b8b83371b6fb",
-        "committeeAddress": "0x11c1427a39f96e1352b514b1c07493e3c06dea67",
+        "assetManagerAddress": "0xa2b6ec586f989cf1c055b7c9d16fdda80fdd679b",
+        "buyerAddress": "0x4a1f4b938781ab185d5ac7dc8cc4f879c425a15b",
+        "sellerAddress": "0xc73c6c3e80c28dbc55f65bbdc895e828bb98c72d",
+        "guarantorAddress": "0x27084fd6136aa527dc69deb5e36a623a8f343c32",
+        "bonusAddress": "0x482b03c707c3297a82b8b4f9b154c8bfa989c987",
+        "committeeAddress": "0x2c7404ffefa6eaf397ed2da003e53acffafa12c4",
         "baseTokenAddress": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
         "baseBase": 1e6,
         "tidalBase": 1e18,
-        "port": 8080
+        "port": 8083
     }
 }
