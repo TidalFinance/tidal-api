@@ -26,7 +26,7 @@ const baseToken = new web3.eth.Contract(erc20Abi, config.baseTokenAddress)
 const ASSETS_NAME_LIST = [
 ['FIS', 'StaFi'],
 ['IF', 'Impossible Finance'],
-['POND', 'MARLIN'],
+['POND', 'Marlin'],
 ['BZRX', 'bZx'],
 ['XEND', 'Xend Finance'],
 ['EZ', 'EasyFi'],
@@ -121,11 +121,7 @@ const getPriceRetry = async (symbol, times=4) => {
 
 
 const getPremiumRate = (assetIndex) => {
-  if (assetIndex == 5) {
-    return 384
-  } else {
-    return 961;
-  }
+  return 961;
 }
 
 
