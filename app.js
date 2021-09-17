@@ -299,6 +299,12 @@ const Manager = {
 
   async repeat() {
     await Manager.loadMorePayoutRequests();
+  },
+
+  async repeat2() {
+    for (let i = 0; i < ASSETS_NAME_LIST.length; ++i) {
+      await Manager.loadOneAssetExtended(i);
+    }
   }
 };
 
@@ -308,6 +314,10 @@ Manager.execute();
 setInterval(() => {
   Manager.repeat();
 }, 60000);
+
+setInterval(() => {
+  Manager.repeat2();
+}, 600000);
 
 
 app.use(function(req, res, next) {
