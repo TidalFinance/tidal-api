@@ -30,7 +30,8 @@ const ASSETS_NAME_LIST = [
 ['BZRX', 'bZx'],
 ['XEND', 'Xend Finance'],
 ['EZ', 'EasyFi'],
-['YFI', 'Yearn']];
+['YFI', 'Yearn'],
+['SOLV', 'Solv Finance']];
 
 const symbolToId = {
   'AAVE': 'aave',
@@ -86,6 +87,9 @@ const waitFor = (duration) => {
 
 const getPrice = (symbol) => {
   const id = symbolToId[symbol];
+
+  if (!id) return 0;
+
   return new Promise((resolve, reject) => {
     const url = 'https://api.coingecko.com/api/v3/simple/price?ids='+ id +'&vs_currencies=usd';
     request(url, (error, response, body) => {
