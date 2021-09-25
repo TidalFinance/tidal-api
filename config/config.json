@@ -13,7 +13,7 @@
         "port": 8080
     },
     "production":{
-        "web3Addr": "https://rpc-mainnet.maticvigil.com/v1/80f11e9ae38e65397d37759c6ffc33abd7735c0d",
+        "web3Addr": "https://polygon-mainnet.infura.io/v3/cce13297f1e14fd3abd4f0cca5b29f8a",
         "assetManagerAddress": "0xa2b6ec586f989cf1c055b7c9d16fdda80fdd679b",
         "buyerAddress": "0x4a1f4b938781ab185d5ac7dc8cc4f879c425a15b",
         "sellerAddress": "0xc73c6c3e80c28dbc55f65bbdc895e828bb98c72d",
