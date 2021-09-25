@@ -31,7 +31,7 @@ const ASSETS_NAME_LIST = [
 ['XEND', 'Xend Finance'],
 ['EZ', 'EasyFi'],
 ['YFI', 'Yearn'],
-['SOLV', 'Solv Finance']];
+['SOLV', 'Solv Protocol']];
 
 const symbolToId = {
   'AAVE': 'aave',
