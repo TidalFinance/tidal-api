@@ -21,6 +21,8 @@ const guarantor = new web3.eth.Contract([{"inputs":[],"stateMutability":"nonpaya
 const bonus = new web3.eth.Contract([{"type":"constructor","stateMutability":"nonpayable","inputs":[]},{"type":"event","name":"OwnershipTransferred","inputs":[{"type":"address","name":"previousOwner","internalType":"address","indexed":true},{"type":"address","name":"newOwner","internalType":"address","indexed":true}],"anonymous":false},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"bonusPerAssetOfG","inputs":[{"type":"uint16","name":"","internalType":"uint16"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"bonusPerAssetOfS","inputs":[{"type":"uint16","name":"","internalType":"uint16"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"extra","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"getCurrentWeek","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"getNow","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"getUnlockTime","inputs":[{"type":"uint256","name":"time_","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"getUnlockWeek","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"guarantorWeek","inputs":[{"type":"uint16","name":"","internalType":"uint16"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"offset","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"owner","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"contract IRegistry"}],"name":"registry","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"renounceOwnership","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"sellerWeek","inputs":[{"type":"uint16","name":"","internalType":"uint16"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setBonusPerAssetOfG","inputs":[{"type":"uint16","name":"assetIndex_","internalType":"uint16"},{"type":"uint256","name":"value_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setBonusPerAssetOfS","inputs":[{"type":"uint16","name":"assetIndex_","internalType":"uint16"},{"type":"uint256","name":"value_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setExtra","inputs":[{"type":"uint256","name":"extra_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setOffset","inputs":[{"type":"uint256","name":"offset_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setRegistry","inputs":[{"type":"address","name":"registry_","internalType":"contract IRegistry"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"transferOwnership","inputs":[{"type":"address","name":"newOwner","internalType":"address"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"updateGuarantorBonus","inputs":[{"type":"uint16","name":"assetIndex_","internalType":"uint16"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"updateSellerBonus","inputs":[{"type":"uint16","name":"assetIndex_","internalType":"uint16"}]}], config.bonusAddress);
 const committee = new web3.eth.Contract([{"type":"constructor","stateMutability":"nonpayable","inputs":[]},{"type":"event","name":"OwnershipTransferred","inputs":[{"type":"address","name":"previousOwner","internalType":"address","indexed":true},{"type":"address","name":"newOwner","internalType":"address","indexed":true}],"anonymous":false},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"addMember","inputs":[{"type":"address","name":"who_","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"commiteeVoteThreshod","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"confirmPayoutAmountRequest","inputs":[{"type":"uint16","name":"assetIndex_","internalType":"uint16"},{"type":"uint256","name":"payoutId_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"confirmPayoutStartRequest","inputs":[{"type":"uint256","name":"requestIndex_","internalType":"uint256"},{"type":"uint256","name":"payoutId_","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"feeToRequestPayout","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"isMember","inputs":[{"type":"address","name":"who_","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"isPayoutStartRequestExpired","inputs":[{"type":"uint256","name":"requestIndex_","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"maximumRequestDuration","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"","internalType":"uint256"}],"name":"memberIndexPlusOne","inputs":[{"type":"address","name":"","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"members","inputs":[{"type":"uint256","name":"","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"owner","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"toAddress","internalType":"address"},{"type":"uint256","name":"sellerAmount","internalType":"uint256"},{"type":"uint256","name":"guarantorAmount","internalType":"uint256"},{"type":"uint256","name":"stakingAmount","internalType":"uint256"},{"type":"bool","name":"executed","internalType":"bool"},{"type":"uint256","name":"voteCount","internalType":"uint256"}],"name":"payoutAmountRequestMap","inputs":[{"type":"uint16","name":"","internalType":"uint16"},{"type":"uint256","name":"","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"time","internalType":"uint256"},{"type":"uint16","name":"assetIndex","internalType":"uint16"},{"type":"address","name":"requester","internalType":"address"},{"type":"bool","name":"executed","internalType":"bool"},{"type":"uint256","name":"voteCount","internalType":"uint256"}],"name":"payoutStartRequests","inputs":[{"type":"uint256","name":"","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"contract IRegistry"}],"name":"registry","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"removeMember","inputs":[{"type":"address","name":"who_","internalType":"address"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"renounceOwnership","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"requestPayoutAmount","inputs":[{"type":"uint16","name":"assetIndex_","internalType":"uint16"},{"type":"uint256","name":"payoutId_","internalType":"uint256"},{"type":"address","name":"toAddress_","internalType":"address"},{"type":"uint256","name":"sellerAmount_","internalType":"uint256"},{"type":"uint256","name":"guarantorAmount_","internalType":"uint256"},{"type":"uint256","name":"stakingAmount_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"requestPayoutStart","inputs":[{"type":"uint16","name":"assetIndex_","internalType":"uint16"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setCommiteeVoteThreshod","inputs":[{"type":"uint256","name":"threshold_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setFeeToRequestPayout","inputs":[{"type":"uint256","name":"fee_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setMaximumRequestDuration","inputs":[{"type":"uint256","name":"duration_","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"setRegistry","inputs":[{"type":"address","name":"registry_","internalType":"contract IRegistry"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"transferOwnership","inputs":[{"type":"address","name":"newOwner","internalType":"address"}]}], config.committeeAddress);
 
+const moreBonusHelper = new web3.eth.Contract([{"inputs":[{"internalType":"contract IRegistry","name":"registry_","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user_","type":"address"},{"indexed":false,"internalType":"uint256","name":"pid_","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount_","type":"uint256"}],"name":"AddBonus","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"pid_","type":"uint256"},{"indexed":false,"internalType":"uint16","name":"assetIndex","type":"uint16"},{"indexed":false,"internalType":"address","name":"token_","type":"address"}],"name":"AddPool","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user_","type":"address"},{"indexed":false,"internalType":"uint256","name":"pid_","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount_","type":"uint256"}],"name":"Claim","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user_","type":"address"},{"indexed":false,"internalType":"uint256","name":"pid_","type":"uint256"}],"name":"Update","type":"event"},{"inputs":[{"internalType":"uint256","name":"pid_","type":"uint256"},{"internalType":"uint256","name":"amount_","type":"uint256"}],"name":"addBonus","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"pid_","type":"uint256"},{"internalType":"uint256","name":"amount_","type":"uint256"}],"name":"addBonusNative","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint16","name":"assetIndex_","type":"uint16"},{"internalType":"address","name":"token_","type":"address"}],"name":"addPool","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"pid_","type":"uint256"}],"name":"claim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"who_","type":"address"},{"internalType":"uint256","name":"pid_","type":"uint256"}],"name":"getUserSellerBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"forwarder","type":"address"}],"name":"isTrustedForwarder","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"who_","type":"address"},{"internalType":"uint256[]","name":"pidArray_","type":"uint256[]"}],"name":"massUpdate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"poolInfo","outputs":[{"internalType":"uint16","name":"assetIndex","type":"uint16"},{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"accRewardPerShare","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"registry","outputs":[{"internalType":"contract IRegistry","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"who_","type":"address"},{"internalType":"uint256","name":"pid_","type":"uint256"}],"name":"update","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"rewardAmount","type":"uint256"},{"internalType":"uint256","name":"rewardDebt","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"versionRecipient","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}], config.moreBonusAddress);
+
 const baseToken = new web3.eth.Contract(erc20Abi, config.baseTokenAddress)
 
 const ASSETS_NAME_LIST = [
@@ -129,6 +131,51 @@ const getPremiumRate = (assetIndex) => {
 }
 
 
+const getBlockNumber = async () => {
+  return await web3.eth.getBlockNumber();
+}
+
+
+const getEventsBetweenInter = async (myContract, start, end, eventName) => {
+  const events = await myContract.getPastEvents(eventName, {
+    fromBlock: start,
+    toBlock: end
+  });
+
+  const result = [];
+
+  const all = events.map(async event => {
+    const pid = event.returnValues.pid_;
+    const amount = event.returnValues.amount_;
+    result.push({
+      pid: pid,
+      amount: amount
+    });
+  });
+
+  await Promise.all(all);
+  return result;
+}
+
+
+const getEventsBetween = async (myContract, start, end, eventName) => {
+  const result = [];
+
+  for (let p = start; p < end; p += 1000) {
+    try {
+      const partialResult = await getEventsBetweenInter(myContract, p, p + 1000, eventName);
+      partialResult.forEach(item => result.push(item));
+    } catch(e) {
+      continue;
+    }
+
+    await waitFor(1100);
+  }
+
+  return result;
+}
+
+
 const Manager = {
   allAssets: [],
   allCategories: [],
@@ -191,6 +238,8 @@ const Manager = {
     let tidalPrice = 0;
     let bonusOfS = 0;
     let bonusOfG = 0;
+
+    Manager.allAssets[assetIndex_].decimals = decimals;
 
     const all = [(async() => {
       Manager.allAssets[assetIndex_].guarantorBalance = (await callFunction(guarantor.methods.assetBalance(assetIndex_))) / base;
@@ -290,6 +339,23 @@ const Manager = {
     return array;
   },
 
+  async loadMoreBonus() {
+    const endBlock = +(await getBlockNumber());
+    if (!endBlock || endBlock < 0) {
+      return;
+    }
+
+    const startBlock = endBlock - 38000 * 10;  // In 10 days.
+    const result = await getEventsBetween(moreBonusHelper, startBlock, endBlock, "AddBonus");
+
+    const pid2AssetIndex = [0];
+    result.forEach(item => {
+      const assetIndex = pid2AssetIndex[item.pid];
+      Manager.allAssets[assetIndex].moreApr =
+        Manager.allAssets[assetIndex].price * (item.amount / (10 ** Manager.allAssets[assetIndex].decimals)) / 7 * 365 / Manager.allAssets[assetIndex].sellerBalance * 1e6;
+    });
+  },
+
   async execute() {
     for (let i = 0; i < ASSETS_NAME_LIST.length; ++i) {
       await Manager.loadOneAssetBasic(i);
@@ -299,6 +365,8 @@ const Manager = {
     await Manager.loadOneCategory(0);
     await Manager.loadOneCategory(1);
     await Manager.loadOneCategory(2);
+
+    await Manager.loadMoreBonus();
   },
 
   async repeat() {
@@ -309,6 +377,10 @@ const Manager = {
     for (let i = 0; i < ASSETS_NAME_LIST.length; ++i) {
       await Manager.loadOneAssetExtended(i);
     }
+  },
+
+  async repeat3() {
+    await Manager.loadMoreBonus();
   }
 };
 
@@ -322,6 +394,10 @@ setInterval(() => {
 setInterval(() => {
   Manager.repeat2();
 }, 600000);
+
+setInterval(() => {
+  Manager.repeat3();
+}, 3600000);  // 1 hour
 
 
 app.use(function(req, res, next) {

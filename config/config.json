@@ -8,6 +8,7 @@
         "bonusAddress": "0x3aec98a75b6053f82504c4577566f37c298afa06",
         "committeeAddress": "0xca3c906b65f1fcd0fb7746b3e72f82a7f908afd6",
         "baseTokenAddress": "0x5382fd16980504f6b487261795a910e9b3b6557c",
+        "moreBonusHelperAddress": "0x34dDbD77800DaF551Cd5B0C0965e5e91F0bD24da",
         "baseBase": 1e6,
         "tidalBase": 1e18,
         "port": 8080
@@ -21,6 +22,7 @@
         "bonusAddress": "0x482b03c707c3297a82b8b4f9b154c8bfa989c987",
         "committeeAddress": "0x2c7404ffefa6eaf397ed2da003e53acffafa12c4",
         "baseTokenAddress": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+        "moreBonusHelperAddress": "0x34dDbD77800DaF551Cd5B0C0965e5e91F0bD24da",
         "baseBase": 1e6,
         "tidalBase": 1e18,
         "port": 8083
